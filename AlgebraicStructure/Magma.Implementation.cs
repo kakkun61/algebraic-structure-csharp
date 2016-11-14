@@ -2,6 +2,8 @@
 
 namespace AlgebraicStructure.Magma.Implementation
 {
+#region String
+
     public class StringMonoid : IMonoid<StringMonoid>
     {
         readonly string raw;
@@ -36,4 +38,6 @@ namespace AlgebraicStructure.Magma.Implementation
     {
         public ISet<StringMonoid> Identities { get { return new HashSet<StringMonoid> { new StringMonoid("") }; } }
     }
+
+#endregion
 }
