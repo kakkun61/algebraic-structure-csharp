@@ -41,6 +41,8 @@ namespace AlgebraicStructure.Magma.Implementation
 
     public class StringMonoidFunctions : IMonoidFunctions<StringMonoid>
     {
+        public static readonly StringMonoidFunctions Instance = new StringMonoidFunctions();
+
         public ISet<StringMonoid> Identities { get { return new HashSet<StringMonoid> { new StringMonoid("") }; } }
     }
 

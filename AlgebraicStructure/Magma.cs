@@ -20,6 +20,8 @@ namespace AlgebraicStructure.Magma
 
 #endregion
 
+#region Identical Magma
+
     interface IIdenticalMagma<T> : IMagma<T> where T : IIdenticalMagma<T>
     {
     }
