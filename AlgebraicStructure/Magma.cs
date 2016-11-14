@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AlgebraicStructure
+namespace AlgebraicStructure.Magma
 {
     public interface IMagma<T> where T : IMagma<T>
     {
@@ -43,7 +43,7 @@ namespace AlgebraicStructure
     interface IMonoidFunctions<T> : IIdenticalMagmaFunctions<T> where T : IMonoid<T>
     {
     }
-    
+
     /// <summary>Associative and identical and cancellative magma.</summary>
     interface IGroup<T> : ILoop<T>, ISemigroup<T> where T : IGroup<T>
     {
