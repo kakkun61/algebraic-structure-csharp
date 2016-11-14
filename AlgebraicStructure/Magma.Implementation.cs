@@ -32,6 +32,11 @@ namespace AlgebraicStructure.Magma.Implementation
             var s = (StringMonoid) obj;
             return raw.Equals(s.raw);
         }
+
+        public override int GetHashCode()
+        {
+            return raw.GetHashCode();
+        }
     }
 
     public class StringMonoidFunctions : IMonoidFunctions<StringMonoid>
