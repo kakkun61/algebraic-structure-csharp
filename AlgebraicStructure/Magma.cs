@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace AlgebraicStructure.Magma
+﻿namespace AlgebraicStructure.Magma
 {
 #region Magma
 
@@ -28,7 +26,7 @@ namespace AlgebraicStructure.Magma
 
     interface IIdenticalMagmaFunctions<T> where T : IIdenticalMagma<T>
     {
-        ISet<T> Identities { get; }
+        T Identity { get; }
     }
 
 #endregion
@@ -50,7 +48,7 @@ namespace AlgebraicStructure.Magma
 
     interface ILoopFunctions<T> : IIdenticalMagmaFunctions<T> where T : ILoop<T>
     {
-        ISet<T> Invertibilities(T e);
+        T Invertibility(T e);
     }
 
 #endregion

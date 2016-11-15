@@ -43,7 +43,7 @@ namespace AlgebraicStructure.Magma.Implementation
     {
         public static readonly StringMonoidFunctions Instance = new StringMonoidFunctions();
 
-        public ISet<StringMonoid> Identities { get { return new HashSet<StringMonoid> { new StringMonoid("") }; } }
+        public StringMonoid Identity { get { return new StringMonoid(""); } }
     }
 
 #endregion

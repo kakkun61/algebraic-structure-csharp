@@ -10,19 +10,17 @@ namespace AlgebraicStructureTest.Magma
         [Test()]
         public void StringMonoidLeftIdentity()
         {
-            var es = StringMonoidFunctions.Instance.Identities;
+            var e = StringMonoidFunctions.Instance.Identity;
             var a = new StringMonoid("hi");
-            foreach (var e in es)
-                Assert.AreEqual(e.op(a), a);
+            Assert.AreEqual(e.op(a), a);
         }
 
         [Test()]
         public void StringMonoidRightIdentity()
         {
-            var es = StringMonoidFunctions.Instance.Identities;
+            var e = StringMonoidFunctions.Instance.Identity;
             var a = new StringMonoid("hi");
-            foreach (var e in es)
-                Assert.AreEqual(a.op(e), a);
+            Assert.AreEqual(a.op(e), a);
         }
 
         [Test()]
@@ -31,8 +29,7 @@ namespace AlgebraicStructureTest.Magma
             var a = new StringMonoid("1");
             var b = new StringMonoid("2");
             var c = new StringMonoid("3");
-            Assert.AreEqual((a*b)*c, a*(b*c));
+            Assert.AreEqual((a * b) * c, a * (b * c));
         }
     }
 }
-
