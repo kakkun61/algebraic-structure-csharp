@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace AlgebraicStructure.Magma.Implementation
@@ -64,7 +65,9 @@ namespace AlgebraicStructure.Magma.Implementation
 
         public RelativePathGroup op(RelativePathGroup e)
         {
-            return new RelativePathGroup(Path.Combine(Raw, e.Raw));
+            var r = new RelativePathGroup(Path.Combine(Raw, e.Raw));
+            System.Diagnostics.Debug.WriteLine("op: \"{0}\" \"{1}\" \"{2}\"", Raw, e.Raw, r.Raw);
+            return r;
         }
 
         public static RelativePathGroup operator *(RelativePathGroup a, RelativePathGroup b)
@@ -72,11 +75,34 @@ namespace AlgebraicStructure.Magma.Implementation
             return a.op(b);
         }
 
-        private static string Normalize(string path)
+        public static string Normalize(string path)
         {
-            // TODO remove in-fix ".." and multiple "/"
-            // Meybe Path.FullPath() and Uri.LocalPath are useful.
-            return path.Trim(new char[]{ Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar });
+            var norm = path.Split(new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar })
+                .Where(p => !"".Equals(p))
+                .Aggregate(new Stack<string>(), (acc, e) =>
+                {
+                    switch (e)
+                    {
+                        case RelativePathGroupFunctions.InvertibilityUnit:
+                            if (acc.Count == 0)
+                            {
+                                acc.Push(e);
+                                break;
+                            }
+                            acc.Pop();
+                            break;
+                        case RelativePathGroupFunctions.IdentityString:
+                            break;
+                        default:
+                            acc.Push(e);
+                            break;
+                    }
+                    return acc;
+                })
+                .Reverse()
+                .Aggregate("", Path.Combine);
+            System.Diagnostics.Debug.WriteLine("Normalize: \"{0}\" \"{1}\"", path, norm);
+            return norm;
         }
 
         public override bool Equals(object obj)
@@ -102,7 +128,9 @@ namespace AlgebraicStructure.Magma.Implementation
     {
         public static readonly RelativePathGroupFunctions Instance = new RelativePathGroupFunctions();
 
-        static readonly RelativePathGroup identity = new RelativePathGroup(Path.DirectorySeparatorChar.ToString());
+        internal const string IdentityString = ".";
+
+        static readonly RelativePathGroup identity = new RelativePathGroup(IdentityString);
 
         public RelativePathGroup Identity
         {
@@ -112,14 +140,14 @@ namespace AlgebraicStructure.Magma.Implementation
             }
         }
 
-        static readonly string invUnit = "..";
+        internal const string InvertibilityUnit = "..";
 
         public RelativePathGroup Invertibility(RelativePathGroup e)
         {
             var raw = "";
             for (var i = 0; i < Depth(e); i++)
             {
-                raw = Path.Combine(raw, invUnit);
+                raw = Path.Combine(raw, InvertibilityUnit);
             }
             return new RelativePathGroup(raw);
         }
