@@ -3,34 +3,34 @@ using AlgebraicStructure.Magma.Implementation;
 
 namespace AlgebraicStructureTest.Magma
 {
-	[TestFixture()]
-	public class StringMonoidTest
-	{
-		[Test()]
-		public void LeftIdentity()
-		{
-			var e = StringMonoidFunctions.Instance.Identity;
-			var a = new StringMonoid("hi");
-			Assert.AreEqual(e.op(a), a);
-		}
+    [TestFixture()]
+    public class StringMonoidTest
+    {
+        [Test()]
+        public void LeftIdentity()
+        {
+            var e = StringMonoidFunctions.Instance.Identity;
+            var a = new StringMonoid("hi");
+            Assert.AreEqual(e.op(a), a);
+        }
 
-		[Test()]
-		public void RightIdentity()
-		{
-			var e = StringMonoidFunctions.Instance.Identity;
-			var a = new StringMonoid("hi");
-			Assert.AreEqual(a.op(e), a);
-		}
+        [Test()]
+        public void RightIdentity()
+        {
+            var e = StringMonoidFunctions.Instance.Identity;
+            var a = new StringMonoid("hi");
+            Assert.AreEqual(a.op(e), a);
+        }
 
-		[Test()] 
-		public void Associativity()
-		{
-			var a = new StringMonoid("1");
-			var b = new StringMonoid("2");
-			var c = new StringMonoid("3");
-			Assert.AreEqual((a * b) * c, a * (b * c));
-		}
-	}
+        [Test()]
+        public void Associativity()
+        {
+            var a = new StringMonoid("1");
+            var b = new StringMonoid("2");
+            var c = new StringMonoid("3");
+            Assert.AreEqual((a * b) * c, a * (b * c));
+        }
+    }
 
     [TestFixture()]
     public class RelativePathGroupTest

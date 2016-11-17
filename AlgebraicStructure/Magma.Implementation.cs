@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AlgebraicStructure.Magma.Implementation
 {
-#region String
+    #region String
 
     public class StringMonoid : IMonoid<StringMonoid>
     {
@@ -48,9 +48,9 @@ namespace AlgebraicStructure.Magma.Implementation
         public StringMonoid Identity { get { return new StringMonoid(""); } }
     }
 
-#endregion
+    #endregion
 
-#region Relative Path
+    #region Relative Path
 
     public class RelativePathGroup : IGroup<RelativePathGroup>
     {
@@ -158,5 +158,5 @@ namespace AlgebraicStructure.Magma.Implementation
         }
     }
 
-#endregion
+    #endregion
 }

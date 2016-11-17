@@ -1,24 +1,24 @@
 ﻿namespace AlgebraicStructure.Magma
 {
-#region Magma
+    #region Magma
 
     public interface IMagma<T> where T : IMagma<T>
     {
         T op(T e);
     }
 
-#endregion
+    #endregion
 
-#region Semigroup
+    #region Semigroup
 
     /// <summary>Associative magma.</summary>
     interface ISemigroup<T> : IMagma<T> where T : ISemigroup<T>
     {
     }
 
-#endregion
+    #endregion
 
-#region Identical Magma
+    #region Identical Magma
 
     interface IIdenticalMagma<T> : IMagma<T> where T : IIdenticalMagma<T>
     {
@@ -29,17 +29,17 @@
         T Identity { get; }
     }
 
-#endregion
+    #endregion
 
-#region Cancellative Magma
+    #region Cancellative Magma
 
     interface ICancellativeMagma<T> : IMagma<T> where T : ICancellativeMagma<T>
     {
     }
 
-#endregion
+    #endregion
 
-#region Loop
+    #region Loop
 
     /// <summary>Invertible magma. Identical and cancellative.</summary>
     interface ILoop<T> : ICancellativeMagma<T>, IIdenticalMagma<T> where T : ILoop<T>
@@ -51,9 +51,9 @@
         T Invertibility(T e);
     }
 
-#endregion
+    #endregion
 
-#region Monoid
+    #region Monoid
 
     /// <summary>Associative and identical magma.</summary>
     interface IMonoid<T> : IIdenticalMagma<T>, ISemigroup<T> where T : IMonoid<T>
@@ -64,9 +64,9 @@
     {
     }
 
-#endregion
+    #endregion
 
-#region Group
+    #region Group
 
     /// <summary>Associative and identical and cancellative magma.</summary>
     interface IGroup<T> : ILoop<T>, ISemigroup<T> where T : IGroup<T>
@@ -77,5 +77,5 @@
     {
     }
 
-#endregion
+    #endregion
 }
