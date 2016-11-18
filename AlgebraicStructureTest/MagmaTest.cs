@@ -38,44 +38,44 @@ namespace AlgebraicStructureTest.Magma
         [Test()]
         public void LeftIdentity()
         {
-            var e = RelativePathGroupFunctions.Instance.Identity;
-            var a = new RelativePathGroup("hi");
+            var e = RelativePathMagmaFunctions.Instance.Identity;
+            var a = new RelativePathMagma("hi");
             Assert.AreEqual(e.op(a), a);
         }
 
         [Test()]
         public void RightIdentity()
         {
-            var e = RelativePathGroupFunctions.Instance.Identity;
-            var a = new RelativePathGroup("hi");
+            var e = RelativePathMagmaFunctions.Instance.Identity;
+            var a = new RelativePathMagma("hi");
             Assert.AreEqual(a.op(e), a);
         }
 
         [Test()]
         public void Associativity()
         {
-            var a = new RelativePathGroup("1");
-            var b = new RelativePathGroup("2");
-            var c = new RelativePathGroup("3");
+            var a = new RelativePathMagma("1");
+            var b = new RelativePathMagma("2");
+            var c = new RelativePathMagma("3");
             Assert.AreEqual((a * b) * c, a * (b * c));
-        }
-
-        [Test()]
-        public void LeftInvertibility()
-        {
-            var e = RelativePathGroupFunctions.Instance.Identity;
-            var a = new RelativePathGroup("hi");
-            var ai = RelativePathGroupFunctions.Instance.Invertibility(a);
-            Assert.AreEqual(ai.op(a), e);
         }
 
         [Test()]
         public void RightInvertibility()
         {
-            var e = RelativePathGroupFunctions.Instance.Identity;
-            var a = new RelativePathGroup("hi");
-            var ai = RelativePathGroupFunctions.Instance.Invertibility(a);
+            var e = RelativePathMagmaFunctions.Instance.Identity;
+            var a = new RelativePathMagma("hi");
+            var ai = RelativePathMagmaFunctions.Instance.RightInvertibility(a);
             Assert.AreEqual(a.op(ai), e);
+        }
+
+        [Test()]
+        public void RightDivisibility()
+        {
+            var a = new RelativePathMagma("hi/ho");
+            var b = new RelativePathMagma("ho");
+            var c = new RelativePathMagma("hi");
+            Assert.AreEqual(a / b, c);
         }
     }
 }

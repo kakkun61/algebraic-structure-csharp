@@ -33,8 +33,61 @@
 
     #region Cancellative Magma
 
-    interface ICancellativeMagma<T> : IMagma<T> where T : ICancellativeMagma<T>
+	/// <summary>Cancellative magma.</summary>
+    interface ICancellativeMagma<T> : IRightCancellativeMagma<T>, ILeftCancellativeMagma<T> where T : ICancellativeMagma<T>
     {
+    }
+
+    interface IRightCancellativeMagma<T> : IMagma<T> where T : IRightCancellativeMagma<T>
+    {
+    }
+
+    interface ILeftCancellativeMagma<T> : IMagma<T> where T : ILeftCancellativeMagma<T>
+    {
+    }
+
+	#endregion
+
+    #region Quasigroup
+
+    /// <summary>Devisibile magma.</summary>
+    interface IQuasigroup<T> : ILeftQuasigroup<T>, IRightQuasigroup<T> where T : IQuasigroup<T>
+    {
+    }
+
+    interface IRightQuasigroup<T> : IRightCancellativeMagma<T> where T : IRightQuasigroup<T>
+    {
+    }
+
+    interface ILeftQuasigroup<T> : ILeftCancellativeMagma<T> where T : ILeftQuasigroup<T>
+    {
+    }
+
+    interface IQuasigroupFunctions<T> : IRightQuasigroupFunctions<T>, ILeftQuasigroupFunctions<T> where T : IQuasigroup<T>
+    {
+        /// <summary>c = a / b ⇔ a = c * b</summary>
+        /// <returns>c</returns>
+        /// <param name="a">a</param>
+        /// <param name="b">b</param>
+        T Devide(T a, T b);
+    }
+
+    interface IRightQuasigroupFunctions<T> where T : IRightQuasigroup<T>
+    {
+        /// <summary>c = a / b ⇔ a = c * b</summary>
+        /// <returns>c</returns>
+        /// <param name="a">a</param>
+        /// <param name="b">b</param>
+        T RightDevide(T a, T b);
+    }
+
+    interface ILeftQuasigroupFunctions<T> where T : ILeftQuasigroup<T>
+    {
+        /// <summary>c = b \ a ⇔ a = b * c</summary>
+        /// <returns>c</returns>
+        /// <param name="a">a</param>
+        /// <param name="b">b</param>
+        T LeftDevide(T a, T b);
     }
 
     #endregion
@@ -42,13 +95,31 @@
     #region Loop
 
     /// <summary>Invertible magma. Identical and cancellative.</summary>
-    interface ILoop<T> : ICancellativeMagma<T>, IIdenticalMagma<T> where T : ILoop<T>
+    interface ILoop<T> : IRightLoop<T>, ILeftLoop<T> where T : ILoop<T>
     {
     }
 
-    interface ILoopFunctions<T> : IIdenticalMagmaFunctions<T> where T : ILoop<T>
+    interface IRightLoop<T> : IRightCancellativeMagma<T>, IIdenticalMagma<T> where T : IRightLoop<T>
+    {
+    }
+
+    interface ILeftLoop<T> : ILeftCancellativeMagma<T>, IIdenticalMagma<T> where T : ILeftLoop<T>
+    {
+    }
+
+    interface ILoopFunctions<T> : IRightLoopFunctions<T>, ILeftLoopFunctions<T> where T : ILoop<T>
     {
         T Invertibility(T e);
+    }
+
+    interface IRightLoopFunctions<T> : IIdenticalMagmaFunctions<T> where T : IRightLoop<T>
+    {
+        T RightInvertibility(T e);
+    }
+
+    interface ILeftLoopFunctions<T> : IIdenticalMagmaFunctions<T> where T : ILeftLoop<T>
+    {
+        T LeftInvertibility(T e);
     }
 
     #endregion

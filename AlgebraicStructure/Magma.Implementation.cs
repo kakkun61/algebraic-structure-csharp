@@ -52,27 +52,32 @@ namespace AlgebraicStructure.Magma.Implementation
 
     #region Relative Path
 
-    public class RelativePathGroup : IGroup<RelativePathGroup>
+    public class RelativePathMagma : IRightLoop<RelativePathMagma>, IRightQuasigroup<RelativePathMagma>,ISemigroup<RelativePathMagma>
     {
         public readonly string Raw;
 
-        public RelativePathGroup(string raw)
+        public RelativePathMagma(string raw)
         {
             if (string.IsNullOrWhiteSpace(raw))
                 throw new System.ArgumentNullException();
             this.Raw = Normalize(raw);
         }
 
-        public RelativePathGroup op(RelativePathGroup e)
+        public RelativePathMagma op(RelativePathMagma e)
         {
-            var r = new RelativePathGroup(Path.Combine(Raw, e.Raw));
+            var r = new RelativePathMagma(Path.Combine(Raw, e.Raw));
             System.Diagnostics.Debug.WriteLine("op: \"{0}\" \"{1}\" \"{2}\"", Raw, e.Raw, r.Raw);
             return r;
         }
 
-        public static RelativePathGroup operator *(RelativePathGroup a, RelativePathGroup b)
+        public static RelativePathMagma operator *(RelativePathMagma a, RelativePathMagma b)
         {
             return a.op(b);
+        }
+
+        public static RelativePathMagma operator /(RelativePathMagma a, RelativePathMagma b)
+        {
+            return RelativePathMagmaFunctions.Instance.RightDevide(a, b);
         }
 
         public static string Normalize(string path)
@@ -83,7 +88,7 @@ namespace AlgebraicStructure.Magma.Implementation
                 {
                     switch (e)
                     {
-                        case RelativePathGroupFunctions.InvertibilityUnit:
+                        case RelativePathMagmaFunctions.InvertibilityUnit:
                             if (acc.Count == 0)
                             {
                                 acc.Push(e);
@@ -91,7 +96,7 @@ namespace AlgebraicStructure.Magma.Implementation
                             }
                             acc.Pop();
                             break;
-                        case RelativePathGroupFunctions.IdentityString:
+                        case RelativePathMagmaFunctions.IdentityString:
                             break;
                         default:
                             acc.Push(e);
@@ -107,9 +112,9 @@ namespace AlgebraicStructure.Magma.Implementation
 
         public override bool Equals(object obj)
         {
-            if (!(obj is RelativePathGroup))
+            if (!(obj is RelativePathMagma))
                 return false;
-            var s = (RelativePathGroup)obj;
+            var s = (RelativePathMagma)obj;
             return Raw.Equals(s.Raw);
         }
 
@@ -124,15 +129,15 @@ namespace AlgebraicStructure.Magma.Implementation
         }
     }
 
-    public class RelativePathGroupFunctions : IGroupFunctions<RelativePathGroup>
+    public class RelativePathMagmaFunctions : IRightLoopFunctions<RelativePathMagma>, IRightQuasigroupFunctions<RelativePathMagma>
     {
-        public static readonly RelativePathGroupFunctions Instance = new RelativePathGroupFunctions();
+        public static readonly RelativePathMagmaFunctions Instance = new RelativePathMagmaFunctions();
 
         internal const string IdentityString = ".";
 
-        static readonly RelativePathGroup identity = new RelativePathGroup(IdentityString);
+        static readonly RelativePathMagma identity = new RelativePathMagma(IdentityString);
 
-        public RelativePathGroup Identity
+        public RelativePathMagma Identity
         {
             get
             {
@@ -142,19 +147,24 @@ namespace AlgebraicStructure.Magma.Implementation
 
         internal const string InvertibilityUnit = "..";
 
-        public RelativePathGroup Invertibility(RelativePathGroup e)
+        public RelativePathMagma RightInvertibility(RelativePathMagma e)
         {
             var raw = "";
             for (var i = 0; i < Depth(e); i++)
             {
                 raw = Path.Combine(raw, InvertibilityUnit);
             }
-            return new RelativePathGroup(raw);
+            return new RelativePathMagma(raw);
         }
 
-        static int Depth(RelativePathGroup p)
+        static int Depth(RelativePathMagma p)
         {
             return 1 + p.Raw.Count(c => c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar);
+        }
+
+        public RelativePathMagma RightDevide(RelativePathMagma a, RelativePathMagma b)
+        {
+            return a.op(Instance.RightInvertibility(b));
         }
     }
 
