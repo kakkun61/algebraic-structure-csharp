@@ -1,0 +1,106 @@
+= Algebraic Structure for C#
+
+* Magma
+** Identical (Unital)
+** Associative
+** Cancellative
+** Divisible
+** Invertible
+
+== Magma
+
+There are laws about magma.
+
+=== Identical (Unital)
+
+A right-identical magma satisfies:
+
+latexmath:[$\exists e \in M. \forall a \in M. a \cdot e = a$].
+
+latexmath:[$e$] is called a right-identity element. The magma has one or more right-identity element(s).
+
+A left-identical magma satisfies:
+
+latexmath:[$\exists e \in M. \forall a \in M. e \cdot a = a$].
+
+latexmath:[$e$] is called a left-identity element. The magma has one or more left-identity element(s).
+
+a two-sided-identical magma (identical magma) satisfies both right- and left-identical laws. latexmath:[$e$] is called a two-sided-identity element. The magma has only one identity element.
+
+=== Associative
+
+An associative magma satisfies:
+
+latexmath:[$\forall a, b, c \in M. (a \cdot b) \cdot c = a \cdot (b \cdot c)$].
+
+=== Cancellative
+
+A right-cancellative magma satisfies:
+
+latexmath:[$\forall a, b, c \in M. b \cdot a = c \cdot a \implies b = c$].
+
+A left-cancellative magma satisfies:
+
+latexmath:[$\forall a, b, c \in M. a \cdot b = a \cdot c \implies b = c$].
+
+A two-sided-cancellative magma satisfies both right- and left-cancellative laws.
+
+=== Divisible
+
+A right-divisible magma satisfies:
+
+latexmath:[$\forall a, b \in M. \exists x \in M. a \cdot x = b$].
+
+A left-divisible magma satisfies:
+
+latexmath:[$\forall a, b \in M. \exists x \in M. x \cdot a = b$].
+
+A two-sided-divisible magma satisfies both right- and left-divisible laws.
+
+If a magma is right-, left- and two-sided-divisible, it is right-, left- and two-sided-cancellative respectively.
+
+=== Invertible
+
+A right-invertible magma satisfies:
+
+latexmath:[$identical \land \forall a \in M. \exists x \in M. a \cdot x = e$].
+
+latexmath:[$e$] is called a right-invertibility element of latexmath:[$a$]. The magma has one or more right-invertibility element(s).
+
+A left-invertible magma satisfies:
+
+latexmath:[$identical \land \forall a \in M. \exists x \in M. x \cdot a = e$].
+
+latexmath:[$e$] is called a left-invertibility element of latexmath:[$a$]. The magma has one or more left-invertibility element(s).
+
+A two-sided-invertible magme satisfies both right- and left-inveritble laws. If latexmath:[$x$] is both right- and left-invertible, it is called a two-sided-invertiblity element.
+
+If a magma is right-, left- and two-sided-invertible, it is right-, left- and two-sided-cancellative respectively.
+
+== Specially Named Magmas
+
+=== Quasigroup
+
+A quasigroup is a divisible magma.
+
+=== Semigroup
+
+A semigroup is an associatie magma.
+
+=== Loop
+
+A loop is a divisible and identical magma. It is also an invertible magma.
+
+latexmath:[$divisible \land identical \implies \invertible$]
+
+=== Monoid
+
+A monoid is an associative and identical magma.
+
+=== Group
+
+A group is an associative, identical and divisible magma. it is also invertible magma.
+
+Other laws exists:
+
+letexmath:[$assoiative \land two-sided invertible \implies \(\exists! x \in M. x is invertibility\) \land \(\forall x \in M.is x is right-invertibility \if x is left-invertibility\)$]
