@@ -33,7 +33,7 @@
 
     #region Cancellative Magma
 
-	/// <summary>Cancellative magma.</summary>
+    /// <summary>Cancellative magma.</summary>
     interface ICancellativeMagma<T> : IRightCancellativeMagma<T>, ILeftCancellativeMagma<T> where T : ICancellativeMagma<T>
     {
     }
@@ -46,7 +46,7 @@
     {
     }
 
-	#endregion
+    #endregion
 
     #region Quasigroup
 
