@@ -103,4 +103,4 @@ A group is an associative, identical and divisible magma. it is also invertible 
 
 Other laws exists:
 
-letexmath:[$assoiative \land two-sided invertible \implies \(\exists! x \in M. x is invertibility\) \land \(\forall x \in M.is x is right-invertibility \if x is left-invertibility\)$]
+letexmath:[$assoiative \land two-sided invertible \implies \(\exists! x \in M. x is invertibility\) \land \(\forall x \in M. x is right-invertibility \if x is left-invertibility\)$]
