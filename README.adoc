@@ -85,7 +85,7 @@ A quasigroup is a divisible magma.
 
 === Semigroup
 
-A semigroup is an associatie magma.
+A semigroup is an associative magma.
 
 === Loop
 
